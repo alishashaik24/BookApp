@@ -1,0 +1,23 @@
+<div style="text-align: center;">
+<form class="example-form">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Search Books</mat-label>
+    <input [(ngModel)]="bookName" matInput placeholder="search" value="" name="searchtxt">
+  </mat-form-field><br>
+<button class="btn btn-success" (click)="getData(bookName)">Search</button>
+<div class="booksBox">
+<div *ngFor="let book of booksData">
+  <div *ngIf="book" class="card">
+    <div class="card-body">
+      <img src={{book.volumeInfo.imageLinks.thumbnail}} width="180" height="250" alt="">
+    </div>
+    <div class="card-footer">
+      <p>{{book.volumeInfo.title}}</p>
+      <p>{{book.volumeInfo.industryIdentifiers[0].identifier}}</p>
+      <p>{{book.volumeInfo.authors}}</p>
+      <p>{{book.volumeInfo.publisher}}</p>
+      <p *ngIf="book.saleInfo.retailPrice">{{book.saleInfo.retailPrice.amount}}</p>
+    </div>
+  </div>
+</div>
+</div>

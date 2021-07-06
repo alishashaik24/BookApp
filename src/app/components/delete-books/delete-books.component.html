@@ -1,0 +1,20 @@
+<div style="margin-top: 30px;" class="row">
+  <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+    <div class="card">
+      <div class="card-header text-center">Delete Book</div>
+      <div class="card-body text-center">
+        <div>
+          <form [formGroup]="bookForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Book</mat-label>
+              <mat-select [formControl]="bookName">
+                <mat-option *ngFor="let book of allbooks" [value]="book">
+                  {{book}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="bookName.hasError('required')">Please Select a Book</mat-error>
+            </mat-form-field><br>
+          <p id="successMsg" *ngIf="bool" style="color:green;">Successfully Deleted Book</p>
+            <button mat-raised-button color="warn" (click)="deleteBookDetails()"
+              [disabled]="bookForm.invalid">Delete</button>
+

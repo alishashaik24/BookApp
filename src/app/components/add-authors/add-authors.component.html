@@ -1,0 +1,33 @@
+<div style="margin-top: 30px;" class="row">
+  <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+  <div class="card">
+    <div class="card-header text-center">Enter Auther Details</div>
+    <div class="card-body text-center">
+      <div>
+        <form [formGroup]="authorForm" class="example-form">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Author Name</mat-label>
+            <input matInput placeholder="Author Name" value="authorName" [formControl] = "authorName">
+            <mat-error *ngIf="authorName.hasError('required')">Please Enter a Name</mat-error>
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Age</mat-label>
+            <input matInput placeholder="Age" value="authorAge" [formControl]="authorAge">
+            <mat-error *ngIf="authorAge.hasError('required')">Please Enter Age</mat-error>
+            <mat-error *ngIf="authorAge.hasError('pattern')">Age should be a Number</mat-error>
+          </mat-form-field><br>
+          <label id="example-radio-group-label">Gender</label><br>
+          <mat-radio-group [formControl]="authorGender" aria-label="Select an option">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+            <mat-radio-button value="Other">Other</mat-radio-button>
+          </mat-radio-group><br><br>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Award Count</mat-label>
+            <input matInput placeholder="Award Count" value="awardCount" [formControl]="authorAwards">
+            <mat-error *ngIf="authorAwards.hasError('required')">Award Count is Required</mat-error>
+            <mat-error *ngIf="authorAwards.hasError('pattern')">Award Count Should be a Number</mat-error>
+          </mat-form-field><br>
+          <p id="successMsg" *ngIf="bool" style="color:green;">Successfully Entered Author</p>
+          <button mat-raised-button color="primary" (click)="addDirectorDetails()" [disabled]="authorForm.invalid">Submit</button><br>
+

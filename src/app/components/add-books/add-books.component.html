@@ -1,0 +1,52 @@
+<div style="margin-top: 30px;" class="row">
+  <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+  <div class="card">
+    <div class="card-header text-center">Enter Book Details</div>
+    <div class="card-body text-center">
+      <div>
+        <form [formGroup]="bookForm" class="example-form">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Book ISBN</mat-label>
+            <input matInput placeholder="Book ISBN" value="isbn" [formControl] = "isbn">
+            <mat-error *ngIf="isbn.hasError('required')">Please Enter Book ISBN</mat-error>
+            <mat-error *ngIf="isbn.hasError('minlength')">Minimum length should be 13</mat-error>
+            <mat-error *ngIf="isbn.hasError('maxlength')">Maximum length should be 13</mat-error>
+            <mat-error *ngIf="isbn.hasError('pattern')">Only Numeric Characters</mat-error>
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Book Name</mat-label>
+            <input matInput placeholder="Book Name" value="bookName" [formControl]="bookName">
+            <mat-error *ngIf="bookName.hasError('required')">Please Enter Movie Name</mat-error>
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Publisher</mat-label>
+            <input matInput placeholder="Publisher" value="bookPublisher" [formControl]="bookPublisher">
+            <mat-error *ngIf="bookPublisher.hasError('required')">Please Enter a Publisher</mat-error>
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Rating</mat-label>
+            <input matInput placeholder="Rating" value="bookRating" [formControl]="bookRating">
+            <mat-error *ngIf="bookRating.hasError('required')">Please Enter a Rating</mat-error>
+            <mat-error *ngIf="bookRating.hasError('pattern')">Rating should be between 0 to 5</mat-error>
+          </mat-form-field><br>
+          <mat-form-field appearance="fill">
+            <mat-label>Authors</mat-label>
+            <mat-select [formControl]="bookAuthor" multiple>
+              <mat-select-trigger>
+                {{bookAuthor.value ? bookAuthor.value[0] : ''}}
+                <span *ngIf="bookAuthor.value?.length > 1" class="example-additional-selection">
+                  (+{{bookAuthor.value.length - 1}} {{bookAuthor.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let author of allAuthors" [value]="author">{{author}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="bookAuthor.hasError('required')">Please choose Author</mat-error>
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="Publisher" value="bookPrice" [formControl]="bookPrice">
+            <mat-error *ngIf="bookPrice.hasError('required')">Please Enter Book Price</mat-error>
+          </mat-form-field><br>
+          <p id="successMsg" *ngIf="bool" style="color:green;">Successfully Entered Book</p><br>
+          <button mat-raised-button color="primary" (click)="addBookDetails()" [disabled]="bookForm.invalid">Submit</button>
+

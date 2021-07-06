@@ -1,0 +1,31 @@
+<div style="margin-top: 30px;" class="row">
+  <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+    <div class="card">
+      <div class="card-header text-center">Update Author Details</div>
+      <div class="card-body text-center">
+        <div>
+          <form [formGroup]="authorForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Author</mat-label>
+              <mat-select [formControl]="authorName">
+                <mat-option *ngFor="let author of allAuthors" [value]="author">
+                  {{author}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="authorName.hasError('required')">Please Choose a Name</mat-error>
+            </mat-form-field><br>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Age</mat-label>
+              <input matInput placeholder="Age" value="age" [formControl]="authorAge">
+            <mat-error *ngIf="authorAge.hasError('required')">Please Enter updated Age</mat-error>
+            <mat-error *ngIf="authorAge.hasError('pattern')">updated Age Should be Number</mat-error>
+            </mat-form-field><br>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Award Count</mat-label>
+              <input matInput placeholder="Award Count" value="awardCount" [formControl]="authorAwards">
+            <mat-error *ngIf="authorAwards.hasError('required')">Please Enter Updated Awards Count</mat-error>
+            <mat-error *ngIf="authorAwards.hasError('pattern')">Updated Awards Count Should be Number</mat-error>
+            </mat-form-field><br>
+            <p id="successMsg" *ngIf="bool" style="color:green;">Successfully Updated Director</p>
+            <button mat-raised-button color="primary" (click)="updateAuthorDetails()" [disabled]="authorForm.invalid">Update</button>
+
